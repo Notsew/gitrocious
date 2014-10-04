@@ -18,7 +18,7 @@ class KeysControllerTest < ActionController::TestCase
 
   test "should create key" do
     assert_difference('Key.count') do
-      post :create, key: { value: @key.value }
+      post :create, key: { user_id: @key.user_id, value: @key.value }
     end
 
     assert_redirected_to key_path(assigns(:key))
@@ -35,7 +35,7 @@ class KeysControllerTest < ActionController::TestCase
   end
 
   test "should update key" do
-    patch :update, id: @key, key: { value: @key.value }
+    patch :update, id: @key, key: { user_id: @key.user_id, value: @key.value }
     assert_redirected_to key_path(assigns(:key))
   end
 

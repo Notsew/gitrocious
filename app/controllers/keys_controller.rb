@@ -28,9 +28,6 @@ class KeysController < ApplicationController
 
     respond_to do |format|
       if @key.save
-        open("#{ENV['HOME']}/.ssh/authorized_keys", 'a') { |f|
-          f.puts "Hello, world."
-        }
         format.html { redirect_to @key, notice: 'Key was successfully created.' }
         format.json { render :show, status: :created, location: @key }
       else
@@ -72,6 +69,6 @@ class KeysController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def key_params
-      params.require(:key).permit(:value)
+      params.require(:key).permit(:value, :user_id)
     end
 end
