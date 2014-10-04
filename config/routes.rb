@@ -1,4 +1,19 @@
 Rails.application.routes.draw do
+  root "main#index"
+  get 'main/index'
+
+  get 'main/login'
+
+  get 'main/logout'
+
+  resources :keys
+
+  resources :repos
+
+  resources :groups
+
+  resources :users
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
