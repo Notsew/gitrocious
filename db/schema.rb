@@ -11,13 +11,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141004160912) do
+ActiveRecord::Schema.define(version: 20141004172528) do
 
   create_table "groups", force: true do |t|
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "groups_repos", id: false, force: true do |t|
+    t.integer "group_id", null: false
+    t.integer "repo_id",  null: false
+  end
+
+  add_index "groups_repos", ["group_id", "repo_id"], name: "index_groups_repos_on_group_id_and_repo_id"
+  add_index "groups_repos", ["repo_id", "group_id"], name: "index_groups_repos_on_repo_id_and_group_id"
 
   create_table "groups_users", id: false, force: true do |t|
     t.integer "group_id", null: false
@@ -44,6 +52,14 @@ ActiveRecord::Schema.define(version: 20141004160912) do
   end
 
   add_index "repos", ["name"], name: "index_repos_on_name"
+
+  create_table "repos_users", id: false, force: true do |t|
+    t.integer "repo_id", null: false
+    t.integer "user_id", null: false
+  end
+
+  add_index "repos_users", ["repo_id", "user_id"], name: "index_repos_users_on_repo_id_and_user_id"
+  add_index "repos_users", ["user_id", "repo_id"], name: "index_repos_users_on_user_id_and_repo_id"
 
   create_table "users", force: true do |t|
     t.string   "name"
