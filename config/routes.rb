@@ -6,9 +6,12 @@ Rails.application.routes.draw do
 
   get '/logout', to: 'main#logout'
 
-  resources :keys
 
-  resources :repos
+  resources :keys, except: [:edit,:update]
+
+  resources :repos do 
+    get '/download/:branch', to: 'repos#download', as: 'download'
+  end
 
   resources :groups
 

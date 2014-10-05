@@ -61,6 +61,21 @@ class ReposController < ApplicationController
     end
   end
 
+  def download
+    @repo = Repo.find(params[:repo_id])
+    branch = params[:branch]
+    path = "#{@repo.path_to_repo}/#{branch}.zip"
+    if(File.exists?(path))
+      send_file path, :type => 'application/zip', :disposition => 'attachment', :filename => "#{@repo.name}.zip"
+    else
+      Dir.chdir("#{@repo.path_to_repo}") do 
+        `git archive --format=zip -o #{branch}.zip #{branch}`
+        send_file path, :type => 'application/zip', :disposition => 'attachment', :filename => "#{@repo.name}.zip"
+      end
+      
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_repo

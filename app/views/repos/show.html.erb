@@ -4,6 +4,14 @@
   <strong>Name:</strong>
   <%= @repo.name %>
 </p>
+<div>
+	<strong>Branches:</strong>
+	<ul>
+		<% @repo.branches.each do |branch| %>
+			<li><%= branch %>: <%= link_to 'Download Branch', repo_download_path(@repo, branch) %></li>
+		<% end %>
+	</ul>
+</div>
 
 <%= link_to 'Edit', edit_repo_path(@repo) %> |
 <%= link_to 'Back', repos_path %>
