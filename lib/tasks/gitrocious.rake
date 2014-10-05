@@ -27,9 +27,9 @@ namespace :gitrocious do
   		admin_password = "password"
   	end
     if(rvm == "y")
-      command = "source #{home}/.rvm/scripts/rvm && cd #{Rails.root.to_s} && rails runner -e production check_permission.rb"
+      command = "source #{home}/.rvm/scripts/rvm && #{Rails.root.to_s}/check_permission.rb"
     else
-      command = "cd #{Rails.root.to_s} && rails runner -e production check_permission.rb"
+      command = "#{Rails.root.to_s}/check_permission.rb"
     end
 
     if(!Dir.exists?(repo_location))
