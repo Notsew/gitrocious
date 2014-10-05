@@ -20,7 +20,7 @@ namespace :gitrocious do
   		admin_password = "password"
   	end
     if(!Dir.exists?(repo_location))
-      `mkdir #{repo_location}`
+      FileUtils.mkdir(repo_location)
     end
 
   	config = %Q{

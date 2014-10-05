@@ -2,6 +2,8 @@ class Repo < ActiveRecord::Base
 	has_and_belongs_to_many :users
 	has_and_belongs_to_many :groups
 
+	validates :name, presence: true
+
 	after_create :create_repo
 	after_destroy :destroy_repo
 
