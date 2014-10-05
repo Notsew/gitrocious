@@ -1,9 +1,30 @@
-<p id="notice"><%= notice %></p>
+<h2><%= @group.name %></h2>
+<div>
+	<strong>Users:</strong>
+	<ul>
+		<% @group.users.each do |user| %>
+			<% if admin_user %>
+				<li><%= link_to user.name, user_path(user) %></li>
+			<% else %>
+				<li><%= user.name %></li>
+			<% end %>
+		<% end %>
+	</ul>
+</div>
+<div>
+	<strong>Repositories:</strong>
+	<ul>
+		<% @group.repos.each do |repo| %>
+			<% if admin_user %>
+				<li><%= link_to repo.name, repo_path(repo) %></li>
+			<% else %>
+				<li><%= repo.name %></li>
+			<% end %>
+		<% end %>
+	</ul>
+</div>
 
-<p>
-  <strong>Name:</strong>
-  <%= @group.name %>
-</p>
 
-<%= link_to 'Edit', edit_group_path(@group) %> |
-<%= link_to 'Back', groups_path %>
+<br />
+<%= link_to 'Edit', edit_group_path(@group), :class => "btn btn-danger" %> 
+<%= link_to 'Back', groups_path, :class => "btn btn-warning" %>

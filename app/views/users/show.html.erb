@@ -1,7 +1,29 @@
-<p>
-  <strong>Name:</strong>
-  <%= @user.name %>
-</p>
+<h2><%= @user.name %></h2>
+<div>
+	<strong>Groups:</strong>
+	<ul>
+		<% @user.groups.each do |group| %>
+			<% if admin_user %>
+				<li><%= link_to group.name, group_path(group) %></li>
+			<% else %>
+				<li><%= group.name %></li>
+			<% end %>
+		<% end %>
+	</ul>
+</div>
+<div>
+	<strong>Repositories:</strong>
+	<ul>
+		<% @user.repos.each do |repo| %>
+			<% if admin_user %>
+				<li><%= link_to repo.name, repo_path(repo) %></li>
+			<% else %>
+				<li><%= repo.name %></li>
+			<% end %>
+		<% end %>
+	</ul>
+</div>
 
+<br />
 <%= link_to 'Edit', edit_user_path(@user), :class => "btn btn-warning" %> 
 <%= link_to 'Back', users_path, :class => "btn btn-danger" %>

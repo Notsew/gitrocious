@@ -16,8 +16,12 @@
     <%= f.text_field :name, :class =>"form-control" %>
   </div>
   <div class="field form-group">
+    <%= f.label :group_ids,  "Groups" %>:
+    <%= f.collection_select(:group_ids, Group.all, :id, :name, {}, {:class => "chosen-select form-control", :multiple => true, "data-placeholder"=>"Select some groups..."}) %>
+  </div>
+  <div class="field form-group">
     <%= f.label :repo_ids,  "Repos" %>:
-    <%= f.collection_select(:repo_ids, Repo.all, :id, :name, {:prompt => 'Select'}, {:class => "chosen-select form-control", :multiple => true}) %>
+    <%= f.collection_select(:repo_ids, Repo.all, :id, :name, {}, {:class => "chosen-select form-control", :multiple => true, "data-placeholder"=>"Select some repositories..."}) %>
   </div>
   <div class="actions">
     <%= f.submit class: "btn btn-success" %>

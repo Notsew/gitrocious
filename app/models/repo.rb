@@ -3,6 +3,7 @@ class Repo < ActiveRecord::Base
 	has_and_belongs_to_many :groups
 
 	validates :name, presence: true
+	validates :name, uniqueness: true
 
 	after_create :create_repo
 	after_destroy :destroy_repo
@@ -23,6 +24,24 @@ class Repo < ActiveRecord::Base
 			end
 		end
 	end
+
+	def check_user_permission(user)
+		if(self.users.include?(user))
+			return true
+		else
+			return false
+		end
+	end
+
+	def check_group_permission(groups)
+		groups.each do |group|
+			if(self.groups.include?(group))
+				return true
+			end
+		end
+		return false
+	end
+
 	private
 
 	def create_repo
