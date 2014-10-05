@@ -1,9 +1,4 @@
-<p id="notice"><%= notice %></p>
-
-<p>
-  <strong>Name:</strong>
-  <%= @repo.name %>
-</p>
+<h2><%= @repo.name %></h2>
 <div>
 	<strong>Branches:</strong>
 	<ul>
@@ -12,6 +7,31 @@
 		<% end %>
 	</ul>
 </div>
-
-<%= link_to 'Edit', edit_repo_path(@repo) %> |
-<%= link_to 'Back', repos_path %>
+<div>
+	<strong>Users:</strong>
+	<ul>
+		<% @repo.users.each do |user| %>
+			<% if admin_user %>
+				<li><%= link_to user.name, user_path(user) %></li>
+			<% else %>
+				<li><%= user.name %></li>
+			<% end %>
+		<% end %>
+	</ul>
+</div>
+<div>
+	<strong>Groups:</strong>
+	<ul>
+		<% @repo.groups.each do |group| %>
+			<% if admin_user %>
+				<li><%= link_to group.name, group_path(group) %></li>
+			<% else %>
+				<li><%= group.name %></li>
+			<% end %>
+		<% end %>
+	</ul>
+</div>
+<% if(admin_user) %>
+	<%= link_to 'Edit', edit_repo_path(@repo), :class => "btn btn-warning" %> 
+<% end %>
+<%= link_to 'Back', repos_path, :class => "btn btn-danger" %>

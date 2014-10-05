@@ -1,6 +1,3 @@
-<h1>Editing repo</h1>
+<h1>Editing <%=@repo.name%></h1>
 
-<%= render 'form' %>
-
-<%= link_to 'Show', @repo %> |
-<%= link_to 'Back', repos_path %>
+<%= render 'form', :type => "Edit" %>

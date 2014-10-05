@@ -1,4 +1,5 @@
 class GroupsController < ApplicationController
+  before_action :is_logged_in?
   before_action :set_group, only: [:show, :edit, :update, :destroy]
 
   # GET /groups

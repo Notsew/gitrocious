@@ -1,4 +1,5 @@
 class ReposController < ApplicationController
+  before_action :is_logged_in?, except:[:index,:show, :download]
   before_action :set_repo, only: [:show, :edit, :update, :destroy]
 
   # GET /repos
@@ -79,6 +80,6 @@ class ReposController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def repo_params
-      params.require(:repo).permit(:name)
+      params.require(:repo).permit(:name, :user_ids => [], :group_ids => [])
     end
 end

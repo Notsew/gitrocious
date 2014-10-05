@@ -10,6 +10,10 @@ namespace :gitrocious do
   	admin_password = STDIN.gets.chomp
   	puts "Enter location of repositories(defaults to /home/<user>/repos):"
   	repo_location = STDIN.gets.chomp
+    puts "Are you using RVM(default is n)? (y/n)"
+    rvm = STDIN.gets.chomp
+
+
   	if(repo_location.blank?)
   		repo_location = "#{ENV["HOME"]}/repos"
   	end
