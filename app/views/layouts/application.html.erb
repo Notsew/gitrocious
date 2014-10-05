@@ -8,9 +8,18 @@
 
 </head>
 <body>
-<div class="container">
-<%= yield %>
-</div>
+<%= render("shared/nav") %>
+	<div class="container">
+		<% flash.each do |key, value| %>
+		<% if(key == "alert") %>
+		  <%= content_tag :div, value, class: "alert alert-danger", role: "alert" %>
+		<% else %>
+		  <%= content_tag :div, value, class: "alert alert-info", role: "alert" %>
+		<% end %>
+		<% end %>
+		<%= yield %>
+	</div>
+
 <script>
   	$(".chosen-select").chosen();
   </script>

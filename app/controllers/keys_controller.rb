@@ -1,4 +1,5 @@
 class KeysController < ApplicationController
+  before_action :is_logged_in?
   before_action :set_key, only: [:show, :edit, :update, :destroy]
 
   # GET /keys

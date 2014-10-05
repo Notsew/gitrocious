@@ -1,10 +1,10 @@
 Rails.application.routes.draw do
   root "main#index"
-  get 'main/index'
 
-  get 'main/login'
+  get '/login', to: "main#login"
+  post '/create_login', to: 'main#create_login'
 
-  get 'main/logout'
+  get '/logout', to: 'main#logout'
 
   resources :keys
 

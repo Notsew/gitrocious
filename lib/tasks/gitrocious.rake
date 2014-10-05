@@ -19,6 +19,9 @@ namespace :gitrocious do
   	if(admin_password.blank?)
   		admin_password = "password"
   	end
+    if(!Dir.exists?(repo_location))
+      `mkdir #{repo_location}`
+    end
 
   	config = %Q{
   	Rails.application.config.admin_username = "#{admin_name}"
