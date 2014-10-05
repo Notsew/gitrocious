@@ -26,12 +26,12 @@ namespace :gitrocious do
     if(!Dir.exists?(repo_location))
       FileUtils.mkdir(repo_location)
     end
-
+    secret = `rake secret`.tr("\n","")
   	config = %Q{
   	Rails.application.config.admin_username = "#{admin_name}"
   	Rails.application.config.admin_password = "#{admin_password}"
   	Rails.application.config.repo_location = "#{repo_location}"
-
+    ENV["SECRET_KEY_BASE"] = "#{secret}"
   	}
   	path = "#{Rails.root}/config/initializers/gitrocious.rb"
   	if(!File.exists?(path))
