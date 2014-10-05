@@ -10,7 +10,7 @@ class ApplicationController < ActionController::Base
   end
 
   def admin_user
-  @current_user = session[:logged_in]
-end
-helper_method :admin_user
+	  session[:logged_in]
+  end
+  helper_method :admin_user
 end
