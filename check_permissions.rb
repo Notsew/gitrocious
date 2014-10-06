@@ -7,7 +7,7 @@ Rails.env="production"
 Rails.application.require_environment!
 
 command = ENV["SSH_ORIGINAL_COMMAND"]
-repo = Repo.find_by_name(command.split(" ")[1])
+repo = Repo.find_by_name(command.split(" ")[1].tr("'",""))
 
 key = Key.includes(:user).find(ARGV[0])
 user = key.user

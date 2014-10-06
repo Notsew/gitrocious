@@ -27,9 +27,9 @@ namespace :gitrocious do
   		admin_password = "password"
   	end
     if(rvm == "y")
-      command = "source #{home}/.rvm/scripts/rvm && #{Rails.root.to_s}/check_permission.rb"
+      command = "source #{home}/.rvm/scripts/rvm && #{Rails.root.to_s}/check_permissions.rb"
     else
-      command = "#{Rails.root.to_s}/check_permission.rb"
+      command = "#{Rails.root.to_s}/check_permissions.rb"
     end
 
     if(!Dir.exists?(repo_location))
@@ -50,12 +50,10 @@ namespace :gitrocious do
   	
     if(!File.exists?(path))
   		File.open(path, "w+") do |f|
-		  f.write(config)
-		end
-	end
-
-  	#puts `echo $HOME`
-
+		    f.write(config)
+  		end
+  	end
+    `RAILS_ENV=production rake assets:precompile`
   end
 
 end
