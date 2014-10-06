@@ -12,7 +12,7 @@
   <tbody>
     <% @keys.each do |key| %>
       <tr>
-        <td><%= key.value %></td>
+        <td title="<%= key.value %>"><%= key.value[0..60] %>...</td>
         <td><%= key.user.name %></td>
         <td><%= link_to 'Show', key, :class => "btn btn-primary" %></td>
         <td><%= link_to 'Destroy', key, method: :delete, data: { confirm: 'Are you sure?' }, :class => "btn btn-danger" %></td>

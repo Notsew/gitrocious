@@ -9,13 +9,25 @@ class Key < ActiveRecord::Base
   
   private
 
+  def command
+    "command=\"#{Rails.application.config.gitrocious_command} #{self.id}\" #{self.value}"
+  end
+
   def add_to_file
   	open("#{ENV['HOME']}/.ssh/authorized_keys", 'a') do |f|
-	  f.puts "command=\"#{Rails.application.config.gitrocious_command} #{self.id}\" #{self.value}"
-	end
+  	  f.puts command
+  	end
   end
 
   def remove_from_file
-  	`sed -i.bak "/#{self.value}/d" "#{ENV['HOME']}/.ssh/authorized_keys"`
+    output_file = "#{ENV['HOME']}/.ssh/authorized_keys.tmp"
+    input_file = "#{ENV['HOME']}/.ssh/authorized_keys"
+    File.open(output_file, "w") do |out_file|
+      File.foreach(input_file) do |line|
+        out_file.puts line unless line.chomp == command
+      end
+    end
+
+    FileUtils.mv(output_file, input_file)
   end
 end

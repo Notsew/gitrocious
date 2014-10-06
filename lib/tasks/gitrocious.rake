@@ -12,10 +12,15 @@ namespace :gitrocious do
   	repo_location = STDIN.gets.chomp
     puts "Are you using RVM(default is n)? (y/n)"
     rvm = STDIN.gets.chomp
+    puts "Will you be using a web server to serve static assets(Apache,Nginx,etc.) y/n (default is y)?"
+    static_assets = STDIN.gets.chomp
 
     home = ENV["HOME"]
     if(rvm.blank?)
       rvm = "n"
+    end
+    if(static_assets.blank?)
+      static_assets = "y"
     end
   	if(repo_location.blank?)
   		repo_location = "#{home}/repos"
@@ -31,6 +36,11 @@ namespace :gitrocious do
     else
       command = "#{Rails.root.to_s}/check_permissions.rb"
     end
+    if(static_assets == "n")
+      asset = "Rails.application.config.serve_static_assets = true"
+    else
+      asset = ""
+    end
 
     if(!Dir.exists?(repo_location))
       FileUtils.mkdir(repo_location)
@@ -43,6 +53,7 @@ namespace :gitrocious do
   	Rails.application.config.admin_password = "#{admin_password}"
   	Rails.application.config.repo_location = "#{repo_location}"
     Rails.application.config.gitrocious_command = "#{command}"
+    #{asset}
     ENV["SECRET_KEY_BASE"] = "#{secret}"
   	}
   	
@@ -53,7 +64,10 @@ namespace :gitrocious do
 		    f.write(config)
   		end
   	end
+    puts "Compiling assets for production...."
     `RAILS_ENV=production rake assets:precompile`
+    puts "Starting the gitrocious admin site...."
+    `puma -d`
   end
 
 end
