@@ -58,12 +58,16 @@ namespace :gitrocious do
   	}
   	
     path = "#{Rails.root}/config/initializers/gitrocious.rb"
-  	
-    if(!File.exists?(path))
-  		File.open(path, "w+") do |f|
-		    f.write(config)
-  		end
-  	end
+		
+    File.open(path, "w+") do |f|
+	    f.write(config)
+		end
+
+    unless File.directory?("#{home}/.ssh")
+      FileUtils.mkdir_p("#{home}/.ssh")
+      FileUtil.chmod(0700,"#{home}/.ssh")
+    end
+
     puts "Compiling assets for production...."
     `RAILS_ENV=production rake assets:precompile`
     puts "Starting the gitrocious admin site...."
