@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :hooks
+
   root "main#index"
 
   get '/login', to: "main#login"

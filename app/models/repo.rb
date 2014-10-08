@@ -1,6 +1,7 @@
 class Repo < ActiveRecord::Base
 	has_and_belongs_to_many :users
 	has_and_belongs_to_many :groups
+	has_many :hooks
 
 	validates :name, presence: true
 	validates :name, uniqueness: true
@@ -9,7 +10,7 @@ class Repo < ActiveRecord::Base
 	after_destroy :destroy_repo
 
 	def path_to_repo
-		"#{Rails.application.config.repo_location}/#{self.name}"
+		"#{Rails.application.config.repo_location}/#{self.name}.git"
 	end
 
 	def branches
@@ -46,11 +47,11 @@ class Repo < ActiveRecord::Base
 
 	def create_repo
 		Dir.chdir("#{Rails.application.config.repo_location}") do |f|
-			`git init --bare #{self.name}`
+			`git init --bare #{self.name}.git`
 		end
 	end
 
 	def destroy_repo
-		FileUtils.rm_rf("#{Rails.application.config.repo_location}/#{self.name}")
+		FileUtils.rm_rf("#{self.path_to_repo}")
 	end
 end
