@@ -62,7 +62,7 @@ class ReposController < ApplicationController
     end
   end
 
-  def download
+  def download_branch
     @repo = Repo.find(params[:repo_id])
     branch = params[:branch]
     path = "#{@repo.path_to_repo}/#{branch}.zip"
@@ -70,6 +70,13 @@ class ReposController < ApplicationController
       `git archive --format=zip -o #{branch}.zip #{branch}`
       send_file path, :type => 'application/zip', :disposition => 'attachment', :filename => "#{@repo.name}_#{branch}.zip"
     end
+  end
+
+  def download_hook
+    repo = Repo.find(params[:repo_id])
+    hook = params[:hook]
+    path = "#{repo.path_to_repo}/hooks/#{hook}"
+    send_file path, :type => "application/text", :disposition => "attachment", :filename => "#{repo.name}_#{hook}_hook"
   end
 
   private

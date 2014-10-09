@@ -25,6 +25,13 @@ class Repo < ActiveRecord::Base
 		end
 	end
 
+	def hooks
+		hooks = Dir.entries("#{self.path_to_repo}/hooks")
+		hooks.delete(".")
+		hooks.delete("..")
+		hooks
+	end
+
 	def check_user_permission(user)
 		if(self.users.include?(user))
 			return true
@@ -46,7 +53,7 @@ class Repo < ActiveRecord::Base
 
 	def create_repo
 		Dir.chdir("#{Rails.application.config.repo_location}") do |f|
-			`git init --bare #{self.name}.git`
+			`git init --bare --template=#{Rails.root}/gitrocious-template #{self.name}.git`
 		end
 	end
 

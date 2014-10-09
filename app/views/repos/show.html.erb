@@ -3,7 +3,15 @@
 	<strong>Branches:</strong>
 	<ul>
 		<% @repo.branches.each do |branch| %>
-			<li><%= branch %>: <%= link_to "Download #{branch} Branch", repo_download_path(@repo, branch) %></li>
+			<li><%= branch %>: <%= link_to "Download #{branch} branch", repo_download_branch_path(@repo, branch) %></li>
+		<% end %>
+	</ul>
+</div>
+<div>
+	<strong>Hooks:</strong>
+	<ul>
+		<% @repo.hooks.each do |hook| %>
+			<li><%= hook %>: <%= link_to "Download #{hook} hook", repo_download_hook_path(@repo, hook.split(".")[0]) %></li>
 		<% end %>
 	</ul>
 </div>

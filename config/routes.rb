@@ -11,7 +11,8 @@ Rails.application.routes.draw do
   resources :keys, except: [:edit,:update]
 
   resources :repos do 
-    get '/download/:branch', to: 'repos#download', as: 'download'
+    get '/download/branches/:branch/download', to: 'repos#download_branch', as: 'download_branch'
+    get '/hooks/:hook/download', to: "repos#download_hook", as: "download_hook"
   end
 
   resources :groups
