@@ -79,6 +79,17 @@ class ReposController < ApplicationController
     send_file path, :type => "application/text", :disposition => "attachment", :filename => "#{repo.name}_#{hook}_hook"
   end
 
+  def upload_hook
+    repo = Repo.find(params[:repo_id])
+    hook = params[:file]
+    path = "#{repo.path_to_repo}/hooks/#{hook.original_filename}"
+    File.open(path,"wb",) do |f|
+      f.write(hook.read)
+      f.chmod(0755)
+    end
+    redirect_to repo, notice: "Hook successfully uploaded"
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_repo

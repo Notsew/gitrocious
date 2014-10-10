@@ -13,6 +13,7 @@ Rails.application.routes.draw do
   resources :repos do 
     get '/download/branches/:branch/download', to: 'repos#download_branch', as: 'download_branch'
     get '/hooks/:hook/download', to: "repos#download_hook", as: "download_hook"
+    post "/upload_hook", to:"repos#upload_hook", as: "upload_hook"
   end
 
   resources :groups

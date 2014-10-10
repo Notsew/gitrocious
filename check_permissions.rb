@@ -14,11 +14,13 @@ user = key.user
 
 if(repo.check_user_permission(user))
 	Dir.chdir(Rails.application.config.repo_location) do |f|
+		ENV["GITROCIOUS_USER"] = user.name
 		system(command)
 	end
 else
 	if(repo.check_group_permission(user.groups))
 		Dir.chdir(Rails.application.config.repo_location) do |f|
+			ENV["GITROCIOUS_USER"] = user.name
 			system(command)
 		end
 	else

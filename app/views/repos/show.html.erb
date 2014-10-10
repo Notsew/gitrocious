@@ -13,7 +13,22 @@
 		<% @repo.hooks.each do |hook| %>
 			<li><%= hook %>: <%= link_to "Download #{hook} hook", repo_download_hook_path(@repo, hook.split(".")[0]) %></li>
 		<% end %>
+		
 	</ul>
+	
+	<% if(admin_user) %>
+	<%= link_to "Upload Hook", "#", :onclick => "$('#hook_upload_form').show();$('#hook_upload').hide();", :id => "hook_upload" %>
+		<div style="display:none;" id="hook_upload_form">
+			<%= form_tag(repo_upload_hook_path(@repo), role: "form", multipart: true) do %>
+			<div class="form-group">
+				<label for="file">Hook:</label> <%= file_field_tag "file" %>
+			</div>
+
+			<%= submit_tag "Upload Hook", class: "btn btn-success" %>
+
+			<% end %>
+		</div>
+	<% end %>
 </div>
 <div>
 	<strong>Users:</strong>
