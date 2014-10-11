@@ -1,0 +1,18 @@
+<p>
+  <strong>Group:</strong>
+  <%= @group_repo_permission.group.name %>
+</p>
+
+<p>
+  <strong>Repo:</strong>
+  <%= @group_repo_permission.repo.name %>
+</p>
+
+<p>
+  <strong>Branch:</strong>
+  <%= @group_repo_permission.branch %>
+</p>
+
+
+<%= link_to 'Edit', edit_group_repo_permission_path(@group_repo_permission),:class =>"btn btn-warning" %> 
+<%= link_to 'Back', group_repo_permissions_path, :class =>"btn btn-danger" %>

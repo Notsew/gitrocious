@@ -14,7 +14,7 @@
 <div>
 	<strong>Repositories:</strong>
 	<ul>
-		<% @user.repos.each do |repo| %>
+		<% @user.repos.uniq.each do |repo| %>
 			<% if admin_user %>
 				<li><%= link_to repo.name, repo_path(repo) %></li>
 			<% else %>

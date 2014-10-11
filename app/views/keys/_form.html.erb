@@ -12,7 +12,7 @@
   <% end %>
   <div class="field form-group">
     <%= f.label :user_id %>:
-    <%= f.collection_select(:user_id, User.all, :id, :name, {:prompt => 'Select'}, {:class => "chosen-select form-control"}) %>
+    <%= f.collection_select(:user_id, User.all, :id, :name, {include_blank: true} , {:class => "chosen-select form-control", "data-placeholder" => "Select User..."}) %>
   </div>
   <div class="field form-group">
     <%= f.label :value %>:

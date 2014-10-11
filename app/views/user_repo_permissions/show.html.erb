@@ -1,0 +1,17 @@
+<p>
+  <strong>User:</strong>
+  <%= @user_repo_permission.user.name %>
+</p>
+
+<p>
+  <strong>Repo:</strong>
+  <%= @user_repo_permission.repo.name %>
+</p>
+
+<p>
+  <strong>Branch:</strong>
+  <%= @user_repo_permission.branch %>
+</p>
+
+<%= link_to 'Edit', edit_user_repo_permission_path(@user_repo_permission), :class => "btn btn-warning"  %>
+<%= link_to 'Back', user_repo_permissions_path , :class => "btn btn-danger" %>

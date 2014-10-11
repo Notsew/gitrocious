@@ -1,0 +1,31 @@
+<h1>Group Permissions List</h1>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Group</th>
+      <th>Repo</th>
+      <th>Branch</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @group_repo_permissions.each do |group_repo_permission| %>
+      <tr>
+        <td><%= group_repo_permission.group.name %></td>
+        <td><%= group_repo_permission.repo.name %></td>
+        <td><%= group_repo_permission.branch %></td>
+        <td>
+          <%= link_to 'Show', group_repo_permission, :class => "btn btn-primary" %>
+          <%= link_to 'Edit', edit_group_repo_permission_path(group_repo_permission) , :class => "btn btn-warning"%>
+          <%= link_to 'Destroy', group_repo_permission, method: :delete, data: { confirm: 'Are you sure?' }, :class => "btn btn-danger" %>
+      </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Group Permission', new_group_repo_permission_path,  :class =>"btn btn-success" %>

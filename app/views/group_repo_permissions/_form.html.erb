@@ -1,0 +1,30 @@
+<%= form_for(@group_repo_permission) do |f| %>
+  <% if @group_repo_permission.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@group_repo_permission.errors.count, "error") %> prohibited this group_repo_permission from being saved:</h2>
+
+      <ul>
+      <% @group_repo_permission.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+ <div class="field form-group">
+    <%= f.label :group_id %>:
+    <%= f.collection_select(:group_id, Group.all, :id, :name, {include_blank: true},  {:class => "chosen-select form-control", "data-placeholder" => "Select Group..."}) %>
+  </div>
+ <div class="field form-group">
+    <%= f.label :repo_id %>:
+    <%= f.collection_select(:repo_id, Repo.all, :id, :name,{include_blank: true}, {:class => "chosen-select form-control", "data-placeholder" => "Select Repo..."}) %>
+  </div>
+  <div class="field form-group">
+    <%= f.label :branch %><br>
+    <%= f.text_field :branch,:class =>"form-control"  %>
+  </div>
+  <div class="actions">
+    <%= f.submit class: "btn btn-success" %>
+    <%= link_to 'Back', group_repo_permissions_path, :class => "btn btn-danger" %>
+  </div>
+<% end %>

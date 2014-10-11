@@ -1,6 +1,8 @@
 class Repo < ActiveRecord::Base
-	has_and_belongs_to_many :users
-	has_and_belongs_to_many :groups
+	has_many :user_repo_permissions, dependent: :destroy
+	has_many :group_repo_permissions, dependent: :destroy
+	has_many :users, through: :user_repo_permissions
+	has_many :groups, through: :group_repo_permissions
 
 	validates :name, presence: true
 	validates :name, uniqueness: true

@@ -33,7 +33,7 @@
 <div>
 	<strong>Users:</strong>
 	<ul>
-		<% @repo.users.each do |user| %>
+		<% @repo.users.uniq.each do |user| %>
 			<% if admin_user %>
 				<li><%= link_to user.name, user_path(user) %></li>
 			<% else %>

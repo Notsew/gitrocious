@@ -98,6 +98,6 @@ class ReposController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def repo_params
-      params.require(:repo).permit(:name, :user_ids => [], :group_ids => [])
+      params.require(:repo).permit(:name)
     end
 end

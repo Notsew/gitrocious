@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
 
+  resources :group_repo_permissions
+
+  resources :user_repo_permissions
+
   root "main#index"
 
   get '/login', to: "main#login"

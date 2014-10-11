@@ -1,0 +1,31 @@
+<h1>User Permission List</h1>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>User</th>
+      <th>Repo</th>
+      <th>Branch</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @user_repo_permissions.each do |user_repo_permission| %>
+      <tr>
+        <td><%= user_repo_permission.user.name %></td>
+        <td><%= user_repo_permission.repo.name %></td>
+        <td><%= user_repo_permission.branch %></td>
+        <td>
+          <%= link_to 'Show', user_repo_permission, :class => "btn btn-primary"  %>
+          <%= link_to 'Edit', edit_user_repo_permission_path(user_repo_permission), :class => "btn btn-warning"  %>
+          <%= link_to 'Destroy', user_repo_permission, method: :delete, data: { confirm: 'Are you sure?' }, :class => "btn btn-danger"  %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New User Permission', new_user_repo_permission_path, :class => "btn btn-success"  %>
