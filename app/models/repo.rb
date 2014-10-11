@@ -57,6 +57,9 @@ class Repo < ActiveRecord::Base
 		Dir.chdir("#{Rails.application.config.repo_location}") do |f|
 			`git init --bare --template=#{Rails.root}/gitrocious-template #{self.name}.git`
 		end
+		update_path = "#{Rails.root}/update"
+		link_path = "#{self.path_to_repo}/hooks/update"
+		File.symlink(update_path,link_path)
 	end
 
 	def destroy_repo

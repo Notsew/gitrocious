@@ -3,7 +3,7 @@
 	<strong>Branches:</strong>
 	<ul>
 		<% @repo.branches.each do |branch| %>
-			<li><%= branch %>: <%= link_to "Download #{branch} branch", repo_download_branch_path(@repo, branch) %></li>
+			<li><%= link_to "Download #{branch} branch", repo_download_branch_path(@repo, branch) %></li>
 		<% end %>
 	</ul>
 </div>
@@ -11,7 +11,7 @@
 	<strong>Hooks:</strong>
 	<ul>
 		<% @repo.hooks.each do |hook| %>
-			<li><%= hook %>: <%= link_to "Download #{hook} hook", repo_download_hook_path(@repo, hook.split(".")[0]) %></li>
+			<li><%= link_to "Download #{hook} hook", repo_download_hook_path(@repo, hook.split(".")[0]) %></li>
 		<% end %>
 		
 	</ul>
@@ -54,7 +54,4 @@
 		<% end %>
 	</ul>
 </div>
-<% if(admin_user) %>
-	<%= link_to 'Edit', edit_repo_path(@repo), :class => "btn btn-warning" %> 
-<% end %>
 <%= link_to 'Back', repos_path, :class => "btn btn-danger" %>
