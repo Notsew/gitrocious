@@ -14,7 +14,7 @@ key = Key.includes(:user).find(ENV["GITROCIOUS_USER_KEY"])
 user = key.user
 
 if(!UserRepoPermission.check_permissions(user.id,repo.id,ref_name))
-	if(!GroupRepoPermission.check_permissions(user.groups.ids,repo.id,ref_name)
+	if(!GroupRepoPermission.check_permissions(user.groups.ids,repo.id,ref_name))
 		abort("Permission denied to repository: #{repo.name}")
 	end
 end
