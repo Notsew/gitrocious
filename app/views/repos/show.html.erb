@@ -11,7 +11,7 @@
 	<strong>Hooks:</strong>
 	<ul>
 		<% @repo.hooks.each do |hook| %>
-			<li><%= link_to "Download #{hook} hook", repo_download_hook_path(@repo, hook.split(".")[0]) %></li>
+			<li><%= link_to "Download #{hook.split('.')[0]} hook", repo_download_hook_path(@repo, hook.split(".")[0]) %></li>
 		<% end %>
 		
 	</ul>

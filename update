@@ -18,3 +18,7 @@ if(!UserRepoPermission.check_permissions(user.id,repo.id,ref_name))
 		abort("Permission denied to repository: #{repo.name}")
 	end
 end
+
+if(File.exists?("./hooks/update.secondary"))
+	system("./hooks/update.secondary #{ref_name} #{old_rev} #{new_rev}")
+end

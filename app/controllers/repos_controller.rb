@@ -75,16 +75,24 @@ class ReposController < ApplicationController
   def download_hook
     repo = Repo.find(params[:repo_id])
     hook = params[:hook]
-    path = "#{repo.path_to_repo}/hooks/#{hook}"
+    if(hook == "update")
+      path = "#{repo.path_to_repo}/hooks/#{hook}.secondary"
+    else
+      path = "#{repo.path_to_repo}/hooks/#{hook}"
+    end
     send_file path, :type => "application/text", :disposition => "attachment", :filename => "#{repo.name}_#{hook}_hook"
   end
 
   def upload_hook
     repo = Repo.find(params[:repo_id])
     hook = params[:file]
-    path = "#{repo.path_to_repo}/hooks/#{hook.original_filename}"
+    if(hook.original_filename.include? ("update"))
+      path = "#{repo.path_to_repo}/hooks/update.secondary"
+    else
+      path = "#{repo.path_to_repo}/hooks/#{hook.original_filename}"
+    end
     File.open(path,"wb",) do |f|
-      f.write(hook.read)
+      f.write(hook.read.gsub(/\r\n?/,"\n"))
       f.chmod(0755)
     end
     redirect_to repo, notice: "Hook successfully uploaded"
