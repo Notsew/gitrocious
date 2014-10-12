@@ -67,6 +67,8 @@ namespace :gitrocious do
       FileUtils.mkdir_p("#{home}/.ssh")
       FileUtils.chmod(0700,"#{home}/.ssh")
     end
+    FileUtils.chmod(0755,"#{Rails.root.to_s}/update")
+    FileUtils.chmod(0755,"#{Rails.root.to_s}/set_variables.rb")
 
     `tar -xf template.tar`
 
