@@ -6,24 +6,36 @@ require APP_PATH
 Rails.env="production"
 Rails.application.require_environment!
 
-command = ENV["SSH_ORIGINAL_COMMAND"]
-repo = Repo.find_by_name(command.split(" ")[1].tr("'",""))
+#command = ENV["SSH_ORIGINAL_COMMAND"]
+(ref_name, old_rev, new_rev) = ARGV
 
-key = Key.includes(:user).find(ARGV[0])
+repo = Repo.find_by_name(ENV["GITROCIOUS_REPO_NAME"])
+
+key = Key.includes(:user).find(ENV["GITROCIOUS_REPO_NAME"])
 user = key.user
 
-if(repo.check_user_permission(user))
-	Dir.chdir(Rails.application.config.repo_location) do |f|
-		ENV["GITROCIOUS_USER"] = user.name
-		system(command)
-	end
-else
-	if(repo.check_group_permission(user.groups))
-		Dir.chdir(Rails.application.config.repo_location) do |f|
-			ENV["GITROCIOUS_USER"] = user.name
-			system(command)
-		end
-	else
+
+
+if(!UserRepoPermission.check_permissions(user.id,repo.id,ref_name))
+	if(!GroupRepoPermission.check_permissions(user.groups.ids,repo.id,ref_name)
 		abort("Permission denied for repository: #{repo.name}")
 	end
 end
+
+
+
+# if(repo.check_user_permission(user))
+# 	Dir.chdir(Rails.application.config.repo_location) do |f|
+# 		ENV["GITROCIOUS_USER"] = user.name
+# 		system(command)
+# 	end
+# else
+# 	if(repo.check_group_permission(user.groups))
+# 		Dir.chdir(Rails.application.config.repo_location) do |f|
+# 			ENV["GITROCIOUS_USER"] = user.name
+# 			system(command)
+# 		end
+# 	else
+# 		abort("Permission denied for repository: #{repo.name}")
+# 	end
+# end

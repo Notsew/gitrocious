@@ -32,9 +32,9 @@ namespace :gitrocious do
   		admin_password = "password"
   	end
     if(rvm == "y")
-      command = "source #{home}/.rvm/scripts/rvm && #{Rails.root.to_s}/check_permissions.rb"
+      command = "source #{home}/.rvm/scripts/rvm && #{Rails.root.to_s}/set_variables.rb"
     else
-      command = "#{Rails.root.to_s}/check_permissions.rb"
+      command = "#{Rails.root.to_s}/set_variables.rb"
     end
     if(static_assets == "n")
       asset = "Rails.application.config.serve_static_assets = true"

@@ -31,6 +31,7 @@ class Repo < ActiveRecord::Base
 		hooks = Dir.entries("#{self.path_to_repo}/hooks")
 		hooks.delete(".")
 		hooks.delete("..")
+		hooks.delete("update")
 		hooks
 	end
 

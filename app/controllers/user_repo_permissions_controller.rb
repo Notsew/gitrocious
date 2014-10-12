@@ -1,4 +1,5 @@
 class UserRepoPermissionsController < ApplicationController
+  before_action :is_logged_in?
   before_action :set_user_repo_permission, only: [:show, :edit, :update, :destroy]
 
   # GET /user_repo_permissions
