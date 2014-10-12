@@ -68,6 +68,8 @@ namespace :gitrocious do
       FileUtils.chmod(0700,"#{home}/.ssh")
     end
 
+    `tar -xf template.tar gitrocious_template`
+
     puts "Compiling assets for production...."
     `RAILS_ENV=production rake assets:precompile`
     puts "Starting the gitrocious admin site...."
