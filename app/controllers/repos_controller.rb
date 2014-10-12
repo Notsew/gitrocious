@@ -1,5 +1,5 @@
 class ReposController < ApplicationController
-  before_action :is_logged_in?, except:[:index,:show, :download]
+  before_action :is_logged_in?, except:[:index,:show, :download_branch, :download_hook]
   before_action :set_repo, only: [:show, :edit, :update, :destroy]
 
   # GET /repos
