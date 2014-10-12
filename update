@@ -1,7 +1,7 @@
 #!/usr/bin/env ruby
 path = ENV["GITROCIOUS_FILE_LOCATION"]
-require APP_PATH = File.expand_path('#{path}/config/application',  __FILE__)
-require File.expand_path('#{path}/config/boot',  __FILE__)
+require APP_PATH = File.expand_path("#{path}/config/application",  __FILE__)
+require File.expand_path("#{path}/config/boot",  __FILE__)
 
 Rails.env="production"
 Rails.application.require_environment!
