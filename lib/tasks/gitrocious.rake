@@ -65,7 +65,7 @@ namespace :gitrocious do
 
     unless File.directory?("#{home}/.ssh")
       FileUtils.mkdir_p("#{home}/.ssh")
-      FileUtil.chmod(0700,"#{home}/.ssh")
+      FileUtils.chmod(0700,"#{home}/.ssh")
     end
 
     puts "Compiling assets for production...."
