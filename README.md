@@ -11,10 +11,10 @@ Ruby authorization layer for git.
 #Installation
 	
 1. Log in to the server as "git" then
-
-
+```
     git clone https://github.com/Notsew/gitrocious.git
     cd gitrocious && bundle install && rake gitrocious:setup
+```
 
 The setup rake will create the admin for gitrocious, run the migrations, and start the production server.  Gitrocious uses puma as the app server, there is a puma config file in the config folder.  Make updates to this file as you see fit.
 
