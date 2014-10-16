@@ -1,9 +1,8 @@
 namespace :gitrocious do
   desc "set admin and path to repos"
   task setup: :environment do
-  	puts "Creating db and running migrations..."
-  	`rake db:create RAILS_ENV=production`
-  	`rake db:migrate RAILS_ENV=production`
+  	puts "Creating db..."
+    `rake db:schema:load RAILS_ENV=production`
   	puts "Enter admin user name(defaults to admin):"
   	admin_name = STDIN.gets.chomp
   	puts "Enter admin password(defaults to password):"

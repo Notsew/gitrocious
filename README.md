@@ -38,9 +38,3 @@ git clone git@mydomain.com:project1
 ```
 
 The user can clone and do local development without issue, permissions will be checked when they attempt to push their changes up.  If the user does not have access then the push will be rejected.
-
-#Notes
-If there are any issues during setup with the migrations, please run 
-```
-rake db:schema:load RAILS_ENV=production
-```
